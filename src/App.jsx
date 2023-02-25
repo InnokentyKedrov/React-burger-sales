@@ -1,11 +1,10 @@
-import { Container } from './components/Container/Container';
+import Container from './components/Container/Container';
+import Header from './components/Header/Header';
 
 export const App = () => {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <header></header>
+      <Header />
       <main>
         <nav>
           <Container className="navigation__container" />

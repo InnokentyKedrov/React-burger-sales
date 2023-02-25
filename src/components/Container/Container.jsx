@@ -1,3 +1,12 @@
 import style from './Container.module.css';
+import cn from 'classnames'
 
-export const Container = (props) => <div className={style.container}></div>;
+const Container = ({ children, className }) => {
+  return (
+  <div className={cn(style.container, className)}>
+    {children}
+  </div>
+  )
+};
+
+export default Container;
