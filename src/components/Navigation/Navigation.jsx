@@ -21,7 +21,7 @@ const Navigation = () => {
                 )}
                 style={{ backgroundImage: `url(${item.image})` }}
                 onClick={() => {
-                  dispatch(changeCategory);
+                  dispatch(changeCategory({indexCategory: i}));
                 }}
               >
                 {item.rus}

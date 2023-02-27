@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { API_URI, POSTFIX } from '../../const';
 
 const initialState = {
   category: [
@@ -16,16 +17,23 @@ const initialState = {
   activeCategory: 0,
 };
 
+export const categoryRequestAsync = createAsyncThunk('category/fetch', (data, obj) => {
+  return fetch(`${API_URI}${POSTFIX}/category`)
+  .then(req => req.json())
+  .catch(error => ({error}))
+})
+
 const categoreSlice = createSlice({
   name: 'category',
   initialState,
   reducers: {
     changeCategory(state, action) {
-      console.log('state: ', state);
-      console.log('action: ', action);
       state.activeCategory = action.payload.indexCategory;
     },
   },
+  extraReducers: {
+
+  }
 });
 
 export const { changeCategory } = categoreSlice.actions;
