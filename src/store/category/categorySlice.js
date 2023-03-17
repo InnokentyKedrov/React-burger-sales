@@ -17,23 +17,33 @@ const initialState = {
   activeCategory: 0,
 };
 
-export const categoryRequestAsync = createAsyncThunk('category/fetch', (data, obj) => {
+export const categoryRequestAsync = createAsyncThunk('category/fetch', () => {
   return fetch(`${API_URI}${POSTFIX}/category`)
-  .then(req => req.json())
-  .catch(error => ({error}))
-})
+    .then((req) => req.json())
+    .catch((error) => ({ error }));
+});
 
 const categoreSlice = createSlice({
-  name: 'category',
   initialState,
+  name: 'category',
   reducers: {
     changeCategory(state, action) {
       state.activeCategory = action.payload.indexCategory;
     },
   },
-  extraReducers: {
-
-  }
+  extraReducers: (builder) => {
+    builder
+      .addCase(categoryRequestAsync.pending, (state) => {
+        state.error = '';
+      })
+      .addCase(categoryRequestAsync.fulfilled, (state, action) => {
+        state.error = '';
+        state.category = action.payload;
+      })
+      .addCase(categoryRequestAsync.rejected, (state, action) => {
+        state.error = action.payload.error;
+      });
+  },
 });
 
 export const { changeCategory } = categoreSlice.actions;
