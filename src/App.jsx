@@ -1,9 +1,10 @@
-import { Provider } from 'react-redux';
-import Header from './components/Header/Header';
-import Navigation from './components/Navigation/Navigation';
-import Catalog from './components/Catalog/Catalog';
-import Footer from './components/Footer/Footer';
-import { store } from './store/index';
+import { Provider } from "react-redux";
+import Header from "./components/Header/Header";
+import Navigation from "./components/Navigation/Navigation";
+import Catalog from "./components/Catalog/Catalog";
+import Footer from "./components/Footer/Footer";
+import { store } from "./store/index";
+import ModalDelivery from "./components/ModalDelivery/ModalDelivery";
 
 export const App = () => {
   return (
@@ -14,6 +15,7 @@ export const App = () => {
         <Catalog />
       </main>
       <Footer />
+      <ModalDelivery />
     </Provider>
   );
 };

@@ -1,8 +1,9 @@
-import OrderGoods from '../OrderGoods/OrderGoods';
-import styles from './Order.module.css';
+import { openModal } from "../../store/modalDelivery/modalDeliverySlice";
+import OrderGoods from "../OrderGoods/OrderGoods";
+import styles from "./Order.module.css";
 
 const Order = () => {
-  const orderList = ['Супер сырный', 'Картошка фри', 'Жгучий хот-дог'];
+  const orderList = ["Супер сырный", "Картошка фри", "Жгучий хот-дог"];
 
   return (
     <div className={styles.order}>
@@ -28,7 +29,15 @@ const Order = () => {
             </p>
           </div>
 
-          <button className={styles.submit}>Оформить заказ</button>
+          <button
+            className={styles.submit}
+            disabled={OrderGoods.length === 0}
+            onclick={() => {
+              dispatch(openModal());
+            }}
+          >
+            Оформить заказ
+          </button>
 
           <div className={styles.apeal}>
             <p className={styles.text}>Бесплатная доставка</p>
