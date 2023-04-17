@@ -53,7 +53,7 @@ const ModalDelivery = () => {
                     type="radio"
                     name="format"
                     value="delivery"
-                    checked
+                    defaultChecked
                   />
                   <span>Доставка</span>
                 </label>
