@@ -1,23 +1,12 @@
-import { useState } from 'react';
-import styles from './Count.module.css';
+import styles from "./Count.module.css";
 
-const Count = (props) => {
-  const [count, setCount] = useState(props.count);
-
-  const addCount = () => {
-    setCount(count + 1);
-  };
-  const removeCount = () => {
-    if (count > 1) setCount(count - 1);
-  };
+const Count = ({ count }) => {
+  const addCount = () => {};
+  const removeCount = () => {};
 
   return (
     <div className={styles.count}>
-      <button
-        className={styles.minus}
-        onClick={removeCount}
-        disabled={count === 1}
-      >
+      <button className={styles.minus} onClick={removeCount}>
         -
       </button>
       <p className={styles.amount}>{count}</p>

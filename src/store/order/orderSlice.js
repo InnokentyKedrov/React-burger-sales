@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  orderList: JSON.parse(localStorage.getItem('order') || '[]'),
+  orderList: JSON.parse(localStorage.getItem("order") || "[]"),
   orderGoods: [],
   totalPrice: 0,
   totalCount: 0,
@@ -10,15 +10,15 @@ const initialState = {
 
 export const localStorageMiddleware = (store) => (next) => (action) => {
   const nextAction = next(action);
-  if (nextAction.type.startsWith('order/')) {
+  if (nextAction.type.startsWith("order/")) {
     const orderList = store.getState().order.orderList;
-    localStorage.setItem('order', JSON.stringify(orderList));
+    localStorage.setItem("order", JSON.stringify(orderList));
   }
   return nextAction;
 };
 
 export const orderRequestAsync = createAsyncThunk(
-  'order/fetch',
+  "order/fetch",
   (_, { getState }) => {
     const listId = getState().order.orderList.map((item) => item.id);
     return fetch(`${API_URI}${POSTFIX}?list=${listId}`)
@@ -28,21 +28,26 @@ export const orderRequestAsync = createAsyncThunk(
 );
 
 const orderSlice = createSlice({
-  name: 'order',
+  name: "order",
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      const product = state.orderList.find(
+      const productOrderList = state.orderList.find(
         (item) => item.id === action.payload.id
       );
-      if (product) product.count += 1;
-      else state.orderList.push({ ...action.payload, count: 1 });
+      if (productOrderList) {
+        productOrderList.count += 1;
+        const productOrderGoods = state.orderGoods.find(
+          (item) => item.id === action.payload.id
+        );
+        productOrderGoods.count = productOrderList.count;
+      } else state.orderList.push({ ...action.payload, count: 1 });
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(orderRequestAsync.pending, (state) => {
-        state.error = '';
+        state.error = "";
       })
       .addCase(orderRequestAsync.fulfilled, (state, action) => {
         const orderGoods = state.orderList.map((item) => {
@@ -53,13 +58,19 @@ const orderSlice = createSlice({
           product.count = item.count;
           return product;
         });
-        state.error = '';
+        state.error = "";
         state.orderGoods = orderGoods;
-        state.totalCount = 0;
-        state.totalPrice = 0;
+        state.totalCount = orderGoods.reduce(
+          (acc, item) => acc + item.count,
+          0
+        );
+        state.totalPrice = orderGoods.reduce(
+          (acc, item) => acc + item.count + item.price,
+          0
+        );
       })
       .addCase(orderRequestAsync.rejected, (state, action) => {
-        state.error = action.payload.error;
+        state.error = action.payload;
       });
   },
 });

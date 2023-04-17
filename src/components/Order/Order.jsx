@@ -1,17 +1,19 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../store/modalDelivery/modalDeliverySlice';
-import OrderGoods from '../OrderGoods/OrderGoods';
-import styles from './Order.module.css';
-import { useEffect } from 'react';
-import { orderRequestAsync } from '../../store/order/orderSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { openModal } from "../../store/modalDelivery/modalDeliverySlice";
+import OrderGoods from "../OrderGoods/OrderGoods";
+import styles from "./Order.module.css";
+import { useEffect } from "react";
+import { orderRequestAsync } from "../../store/order/orderSlice";
 
 const Order = () => {
-  const { totalPrice, totalCount } = useSelector((state) => state.order);
+  const { totalPrice, totalCount, orderList, orderGoods } = useSelector(
+    (state) => state.order
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(orderRequestAsync());
-  }, []);
+  }, [orderList.length]);
 
   return (
     <div className={styles.order}>
@@ -24,9 +26,9 @@ const Order = () => {
 
         <div className={styles.wrap_list}>
           <ul className={styles.list}>
-            {/* {orderList.map((item) => (
-              <OrderGoods item={item} key={item} />
-            ))} */}
+            {orderGoods.map((item) => (
+              <OrderGoods {...item} key={item.id} />
+            ))}
           </ul>
 
           <div className={styles.total}>
