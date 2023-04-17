@@ -1,3 +1,4 @@
+import { API_URI } from "../../const";
 import Count from "../Count/Count";
 import styles from "./OrderGoods.module.css";
 

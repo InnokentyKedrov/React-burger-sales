@@ -1,23 +1,23 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { API_URI, POSTFIX } from '../../const';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { API_URI, POSTFIX } from "../../const";
 
 const initialState = {
   category: [
-    { title: 'burger', rus: 'Бургеры', image: '/img/burger.png' },
-    { title: 'snack', rus: 'Закуски', image: '/img/snack.png' },
-    { title: 'hot-dog', rus: 'Хот-доги', image: '/img/hot-dog.png' },
-    { title: 'combo', rus: 'Комбо', image: '/img/combo.png' },
-    { title: 'shawarma', rus: 'Шаурма', image: '/img/shawarma.png' },
-    { title: 'pizza', rus: 'Пицца', image: '/img/pizza.png' },
-    { title: 'wok', rus: 'Вок', image: '/img/wok.png' },
-    { title: 'dessert', rus: 'Десерты', image: '/img/dessert.png' },
-    { title: 'sauce', rus: 'Соусы', image: '/img/sauce.png' },
+    // { title: 'burger', rus: 'Бургеры', image: '/img/burger.png' },
+    // { title: 'snack', rus: 'Закуски', image: '/img/snack.png' },
+    // { title: 'hot-dog', rus: 'Хот-доги', image: '/img/hot-dog.png' },
+    // { title: 'combo', rus: 'Комбо', image: '/img/combo.png' },
+    // { title: 'shawarma', rus: 'Шаурма', image: '/img/shawarma.png' },
+    // { title: 'pizza', rus: 'Пицца', image: '/img/pizza.png' },
+    // { title: 'wok', rus: 'Вок', image: '/img/wok.png' },
+    // { title: 'dessert', rus: 'Десерты', image: '/img/dessert.png' },
+    // { title: 'sauce', rus: 'Соусы', image: '/img/sauce.png' },
   ],
-  error: '',
+  error: "",
   activeCategory: 0,
 };
 
-export const categoryRequestAsync = createAsyncThunk('category/fetch', () => {
+export const categoryRequestAsync = createAsyncThunk("category/fetch", () => {
   return fetch(`${API_URI}${POSTFIX}/category`)
     .then((req) => req.json())
     .catch((error) => ({ error }));
@@ -25,7 +25,7 @@ export const categoryRequestAsync = createAsyncThunk('category/fetch', () => {
 
 const categoreSlice = createSlice({
   initialState,
-  name: 'category',
+  name: "category",
   reducers: {
     changeCategory(state, action) {
       state.activeCategory = action.payload.indexCategory;
@@ -34,10 +34,10 @@ const categoreSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(categoryRequestAsync.pending, (state) => {
-        state.error = '';
+        state.error = "";
       })
       .addCase(categoryRequestAsync.fulfilled, (state, action) => {
-        state.error = '';
+        state.error = "";
         state.category = action.payload;
       })
       .addCase(categoryRequestAsync.rejected, (state, action) => {

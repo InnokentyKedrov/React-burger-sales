@@ -1,6 +1,6 @@
-import styles from './Footer.module.css';
-import Container from '../Container/Container';
-import logo from '../../assets/img/logo.svg';
+import styles from "./Footer.module.css";
+import Container from "../Container/Container";
+import logo from "../../assets/img/logo-o.svg";
 
 const Footer = () => {
   return (
@@ -73,7 +73,7 @@ const Footer = () => {
               Design: <a href="#">Anastasia Ilina</a>
             </p>
             <p>
-              Developer:{' '}
+              Developer:{" "}
               <a href="mailto:maksim.leskin@methed.ru">Maksim Leskin</a>
             </p>
           </div>
