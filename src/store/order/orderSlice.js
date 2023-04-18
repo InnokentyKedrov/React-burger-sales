@@ -8,6 +8,7 @@ const initialState = {
   totalPrice: 0,
   totalCount: 0,
   error: "",
+  isLoading: false,
 };
 
 export const localStorageMiddleware = (store) => (next) => (action) => {
@@ -72,6 +73,7 @@ const orderSlice = createSlice({
     builder
       .addCase(orderRequestAsync.pending, (state) => {
         state.error = "";
+        state.isLoading = true;
       })
       .addCase(orderRequestAsync.fulfilled, (state, action) => {
         const orderGoods = state.orderList.map((item) => {
@@ -85,9 +87,11 @@ const orderSlice = createSlice({
         state.error = "";
         state.orderGoods = orderGoods;
         [state.totalCount, state.totalPrice] = calcTotal(orderGoods);
+        state.isLoading = false;
       })
       .addCase(orderRequestAsync.rejected, (state, action) => {
         state.error = action.payload.error;
+        state.isLoading = false;
       });
   },
 });

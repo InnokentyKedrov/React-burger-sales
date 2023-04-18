@@ -13,6 +13,7 @@
   overflow-x: auto;
   overflow-y: hidden;
   column-gap: 8px;
+  padding-bottom: 10px;
 }
 
 .button {
@@ -50,39 +51,64 @@
 }
 
 .button_burger {
-  background-image: url('../../assets/img/burger.png');
+  background-image: url("../../assets/img/burger.png");
 }
 
 .button_snack {
-  background-image: url('../../assets/img/snack.png');
+  background-image: url("../../assets/img/snack.png");
 }
 
 .button_hotdog {
-  background-image: url('../../assets/img/hot-dog.png');
+  background-image: url("../../assets/img/hot-dog.png");
 }
 
 .button_combo {
-  background-image: url('../../assets/img/combo.png');
+  background-image: url("../../assets/img/combo.png");
 }
 
 .button_shawarma {
-  background-image: url('../../assets/img/shawarma.png');
+  background-image: url("../../assets/img/shawarma.png");
 }
 
 .button_pizza {
-  background-image: url('../../assets/img/pizza.png');
+  background-image: url("../../assets/img/pizza.png");
 }
 
 .button_wok {
-  background-image: url('../../assets/img/wok.png');
+  background-image: url("../../assets/img/wok.png");
 }
 
 .button_dessert {
-  background-image: url('../../assets/img/dessert.png');
+  background-image: url("../../assets/img/dessert.png");
 }
 
 .button_sauce {
-  background-image: url('../../assets/img/sauce.png');
+  background-image: url("../../assets/img/sauce.png");
+}
+
+/* Pre loader */
+
+.loading {
+  display: block;
+  position: relative;
+  z-index: 1;
+  top: calc(50% - 32px);
+  left: calc(50% - 32px);
+
+  width: 64px;
+  height: 64px;
+
+  border: 12px double #ffaa00;
+  border-left-style: solid;
+  border-radius: 50%;
+
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (min-width: 768px) {

@@ -22,6 +22,33 @@
   justify-content: center;
 }
 
+/* Pre loader */
+
+.loading {
+  display: block;
+  position: relative;
+  z-index: 1;
+  top: calc(50% - 32px);
+  left: calc(50% - 32px);
+
+  width: 64px;
+  height: 64px;
+
+  border: 12px double #ffaa00;
+  border-left-style: solid;
+  border-radius: 50%;
+
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- */
+
 @media (min-width: 1024px) {
   .catalog {
     margin-bottom: 100px;

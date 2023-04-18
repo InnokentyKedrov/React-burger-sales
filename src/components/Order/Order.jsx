@@ -7,9 +7,8 @@ import { orderRequestAsync } from "../../store/order/orderSlice";
 
 const Order = () => {
   const [basketIsOpen, setBasketIsOpen] = useState(true);
-  const { totalPrice, totalCount, orderList, orderGoods } = useSelector(
-    (state) => state.order
-  );
+  const { totalPrice, totalCount, orderList, orderGoods, isLoading } =
+    useSelector((state) => state.order);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,11 +36,15 @@ const Order = () => {
             basketIsOpen ? styles.wrap_list_open : styles.wrap_list_close
           }
         >
-          <ul className={styles.list}>
-            {orderGoods.map((item) => (
-              <OrderGoods {...item} key={item.id} />
-            ))}
-          </ul>
+          {isLoading ? (
+            <span className={styles.loading}></span>
+          ) : (
+            <ul className={styles.list}>
+              {orderGoods.map((item) => (
+                <OrderGoods {...item} key={item.id} />
+              ))}
+            </ul>
+          )}
 
           <div className={styles.total}>
             <p>Итого</p>

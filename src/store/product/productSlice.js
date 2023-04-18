@@ -1,13 +1,14 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { API_URI, POSTFIX } from '../../const';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { API_URI, POSTFIX } from "../../const";
 
 const initialState = {
   products: [],
-  error: '',
+  error: "",
+  isLoading: false,
 };
 
 export const productRequestAsync = createAsyncThunk(
-  'products/fetch',
+  "products/fetch",
   (category) =>
     fetch(`${API_URI}${POSTFIX}?category=${category}`)
       .then((req) => req.json())
@@ -16,19 +17,22 @@ export const productRequestAsync = createAsyncThunk(
 
 const productSlice = createSlice({
   initialState,
-  name: 'products',
+  name: "products",
 
   extraReducers: (builder) => {
     builder
       .addCase(productRequestAsync.pending, (state) => {
-        state.error = '';
+        state.error = "";
+        state.isLoading = true;
       })
       .addCase(productRequestAsync.fulfilled, (state, action) => {
-        state.error = '';
+        state.error = "";
         state.products = action.payload;
+        state.isLoading = false;
       })
       .addCase(productRequestAsync.rejected, (state, action) => {
         state.error = action.payload.error;
+        state.isLoading = false;
       });
   },
 });
