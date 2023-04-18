@@ -1,6 +1,6 @@
-import styles from "./Footer.module.css";
-import Container from "../Container/Container";
-import logo from "../../assets/img/logo-o.svg";
+import styles from './Footer.module.css';
+import Container from '../Container/Container';
+import logo from '../../assets/img/logo-o.svg';
 
 const Footer = () => {
   return (
@@ -68,13 +68,13 @@ const Footer = () => {
           </address>
 
           <div className={styles.development}>
-            <p>© YouMeal, 2022</p>
+            <p>© YouMeal, 2023</p>
             <p>
               Design: <a href="#">Anastasia Ilina</a>
             </p>
             <p>
-              Developer:{" "}
-              <a href="mailto:maksim.leskin@methed.ru">Maksim Leskin</a>
+              Developer:{' '}
+              <a href="mailto:maksim.leskin@methed.ru">Andrey Lavrjonov</a>
             </p>
           </div>
         </div>
