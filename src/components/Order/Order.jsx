@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../store/modalDelivery/modalDeliverySlice";
 import OrderGoods from "../OrderGoods/OrderGoods";
 import styles from "./Order.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { orderRequestAsync } from "../../store/order/orderSlice";
 
 const Order = () => {
+  const [basketIsOpen, setBasketIsOpen] = useState(true);
   const { totalPrice, totalCount, orderList, orderGoods } = useSelector(
     (state) => state.order
   );
@@ -18,13 +19,24 @@ const Order = () => {
   return (
     <div className={styles.order}>
       <section className={styles.wrapper}>
-        <div className={styles.header} tabIndex="0" role="button">
+        <div
+          className={styles.header}
+          tabIndex="0"
+          role="button"
+          onClick={() => {
+            setBasketIsOpen(!basketIsOpen);
+          }}
+        >
           <h2 className={styles.title}>Корзина</h2>
 
           <span className={styles.count}>{totalCount}</span>
         </div>
 
-        <div className={styles.wrap_list}>
+        <div
+          className={
+            basketIsOpen ? styles.wrap_list_open : styles.wrap_list_close
+          }
+        >
           <ul className={styles.list}>
             {orderGoods.map((item) => (
               <OrderGoods {...item} key={item.id} />
@@ -50,8 +62,22 @@ const Order = () => {
           </button>
 
           <div className={styles.apeal}>
-            <p className={styles.text}>Бесплатная доставка</p>
-            <button className={styles.close}>Свернуть</button>
+            {totalPrice >= 599 ? (
+              <p className={styles.text}>Бесплатная доставка</p>
+            ) : (
+              <p className={styles.text}>
+                Стоимость доставки уточните при заказе
+              </p>
+            )}
+
+            <button
+              className={styles.close}
+              onClick={() => {
+                setBasketIsOpen(false);
+              }}
+            >
+              Свернуть
+            </button>
           </div>
         </div>
       </section>

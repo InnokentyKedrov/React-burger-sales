@@ -3,6 +3,12 @@
   background-color: #ffffff;
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .logo {
   width: 196px;
   color: #ff7020;
@@ -77,8 +83,8 @@
   .content {
     display: grid;
     grid-template-areas:
-      'logo address'
-      'development .';
+      "logo address"
+      "development .";
     gap: 35px;
   }
 
