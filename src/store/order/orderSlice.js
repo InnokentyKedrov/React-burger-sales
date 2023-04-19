@@ -68,6 +68,11 @@ const orderSlice = createSlice({
         );
       }
     },
+    clearOrderList: (state, action) => {
+      state.orderList = [];
+      state.orderGoods = [];
+      localStorage.setItem("order", "[]");
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -96,5 +101,5 @@ const orderSlice = createSlice({
   },
 });
 
-export const { addProduct, removeProduct } = orderSlice.actions;
+export const { addProduct, removeProduct, clearOrderList } = orderSlice.actions;
 export default orderSlice.reducer;

@@ -62,6 +62,7 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
+  align-items: center;
 }
 
 @media (min-width: 480px) {
@@ -107,6 +108,7 @@
 
   .development {
     grid-area: development;
+    align-items: flex-start;
   }
 
   .title {

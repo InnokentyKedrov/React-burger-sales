@@ -18,7 +18,6 @@
   align-items: center;
   outline: none;
   cursor: pointer;
-  margin-bottom: 8px;
 }
 
 .header:after {
@@ -136,7 +135,7 @@
   width: 64px;
   height: 64px;
 
-  border: 12px double #ffaa00;
+  border: 12px double #ffab08;
   border-left-style: solid;
   border-radius: 50%;
 
@@ -157,15 +156,6 @@
   .wrapper {
     position: unset;
     padding: 24px 16px;
-  }
-
-  .header {
-    margin-bottom: 12px;
-    pointer-events: none;
-  }
-
-  .header:after {
-    content: none;
   }
 
   .title {

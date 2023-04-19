@@ -56,7 +56,7 @@ const Order = () => {
 
           <button
             className={styles.submit}
-            disabled={OrderGoods.length === 0}
+            disabled={orderGoods.length === 0}
             onClick={() => {
               dispatch(openModal());
             }}

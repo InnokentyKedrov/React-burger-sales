@@ -1,11 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import classNames from "classnames";
 import style from "./ModalDelivery.module.css";
 import { closeModal } from "../../store/modalDelivery/modalDeliverySlice";
+import { clearOrderList } from "../../store/order/orderSlice";
 
 const ModalDelivery = () => {
+  const [format, setFormat] = useState("pickup");
   const { isOpen } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
+
+  const clearState = () => {
+    dispatch(clearOrderList());
+    dispatch(closeModal());
+  };
+
+  const handleChange = (event) => {
+    setFormat(event.target.value);
+  };
+
   return (
     isOpen && (
       <div
@@ -27,12 +40,14 @@ const ModalDelivery = () => {
                   type="text"
                   name="name"
                   placeholder="Ваше имя"
+                  required
                 />
                 <input
                   className={style.input}
                   type="tel"
                   name="phone"
                   placeholder="Телефон"
+                  required
                 />
               </fieldset>
 
@@ -43,6 +58,8 @@ const ModalDelivery = () => {
                     type="radio"
                     name="format"
                     value="pickup"
+                    onChange={handleChange}
+                    defaultChecked
                   />
                   <span>Самовывоз</span>
                 </label>
@@ -53,35 +70,42 @@ const ModalDelivery = () => {
                     type="radio"
                     name="format"
                     value="delivery"
-                    defaultChecked
+                    onChange={handleChange}
                   />
                   <span>Доставка</span>
                 </label>
               </fieldset>
 
-              <fieldset className={style.fieldset}>
-                <input
-                  className={style.input}
-                  type="text"
-                  name="address"
-                  placeholder="Улица, дом, квартира"
-                />
-                <input
-                  className={classNames(style.input, style.input_half)}
-                  type="number"
-                  name="floor"
-                  placeholder="Этаж"
-                />
-                <input
-                  className={classNames(style.input, style.input_half)}
-                  type="number"
-                  name="intercom"
-                  placeholder="Домофон"
-                />
-              </fieldset>
+              {format === "delivery" && (
+                <fieldset className={style.fieldset}>
+                  <input
+                    className={style.input}
+                    type="text"
+                    name="address"
+                    placeholder="Улица, дом, квартира"
+                    required
+                  />
+                  <input
+                    className={classNames(style.input, style.input_half)}
+                    type="number"
+                    name="floor"
+                    placeholder="Этаж"
+                  />
+                  <input
+                    className={classNames(style.input, style.input_half)}
+                    type="number"
+                    name="intercom"
+                    placeholder="Домофон"
+                  />
+                </fieldset>
+              )}
             </form>
-
-            <button className={style.submit} type="submit" form="delivery">
+            <button
+              className={style.submit}
+              type="submit"
+              form="delivery"
+              onSubmit={clearState}
+            >
               Оформить
             </button>
           </div>
